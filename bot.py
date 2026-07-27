@@ -55,11 +55,12 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(text) > 3500:
             await update.message.reply_text(text)
             text = "📚 Продолжение:\n\n"
+if text:
+    await update.message.reply_text(text)
 
-    if text:
-        await update.message.reply_text(text)
-        async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
-            text = update.message.text
+
+async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text
 
     if text == "📚 Слова":
         await words(update, context)
@@ -96,6 +97,7 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"🇷🇺 {word}\n🇪🇪 {dictionary[word]}")
     else:
         await update.message.reply_text("❌ Такого слова пока нет в словаре.")
+    
     
 
 app = Application.builder().token(TOKEN).build()
