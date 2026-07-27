@@ -40,11 +40,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=main_keyboard,
     )
 
+import random
+
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text.strip()
+    text = update.message.text
 
     if text == "📖 Перевести":
-        await update.message.reply_text("Введите русское слово.")
+        await update.message.reply_text("✍️ Напишите русское слово для перевода.")
         return
 
     if text == "🔍 Поиск":
@@ -52,32 +54,50 @@ async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     if text == "📚 Учить слова":
-        await update.message.reply_text("🚧 Раздел находится в разработке.")
+        ru = random.choice(list(dictionary.keys()))
+        await update.message.reply_text(
+            f"📖 Слово дня:\n\n🇷🇺 {ru}\n🇪🇪 {dictionary[ru]}"
+        )
         return
 
     if text == "⭐ Избранное":
-        await update.message.reply_text("⭐ Пока избранных слов нет.")
+        await update.message.reply_text("⭐ Пока список избранного пуст.")
         return
 
     if text == "➕ Добавить слово":
         await update.message.reply_text(
-            "Отправьте слово в формате:\nрусское - эстонское"
+            "Отправьте новое слово в формате:\n"
+            "русское - эстонское"
         )
         return
 
     if text == "📊 Статистика":
         await update.message.reply_text(
-            f"📖 Сейчас в словаре {len(dictionary)} слов."
+            f"📚 В словаре сейчас {len(dictionary)} слов."
         )
         return
 
     if text == "⚙️ Настройки":
-        await update.message.reply_text("⚙️ Настройки скоро появятся.")
+        await update.message.reply_text(
+            "⚙️ Скоро здесь появятся настройки."
+        )
         return
 
     if text == "ℹ️ Помощь":
         await update.message.reply_text(
-            "Напишите русское слово, и я переведу его на эстонский."
+            "Напишите русское слово — я переведу его на эстонский."
+        )
+        return
+
+    word = text.lower().strip()
+
+    if word in dictionary:
+        await update.message.reply_text(
+            f"🇷🇺 {word}\n🇪🇪 {dictionary[word]}"
+        )
+    else:
+        await update.message.reply_text(
+            "❌ Такого слова пока нет в словаре."
         )
         return
 
