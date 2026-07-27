@@ -45,7 +45,18 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/help — помощь\n\n"
         "Или просто отправьте русское слово для перевода."
     )
+async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = "📚 Слова в словаре:\n\n"
 
+    for ru, ee in sorted(dictionary.items()):
+        text += f"🇷🇺 {ru} — 🇪🇪 {ee}\n"
+
+        if len(text) > 3500:
+            await update.message.reply_text(text)
+            text = "📚 Продолжение:\n\n"
+
+    if text:
+        await update.message.reply_text(text)
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
 
