@@ -59,7 +59,7 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text:
         await update.message.reply_text(text)
         async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    text = update.message.text
+            text = update.message.text
 
     if text == "📚 Слова":
         await words(update, context)
