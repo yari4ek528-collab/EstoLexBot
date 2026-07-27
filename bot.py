@@ -59,7 +59,7 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if text:
         await update.message.reply_text(text)
         async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
-            text = update.message.text
+    text = update.message.text
 
     if text == "📚 Слова":
         await words(update, context)
@@ -82,11 +82,8 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return
 
-
     if text == "⚙️ Настройки":
-        await update.message.reply_text(
-            "⚙️ Скоро здесь появятся настройки."
-        )
+        await update.message.reply_text("⚙️ Скоро здесь появятся настройки.")
         return
 
     if text == "ℹ️ Помощь":
@@ -96,13 +93,10 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
     word = text.lower().strip()
 
     if word in dictionary:
-        await update.message.reply_text(
-            f"🇷🇺 {word}\n🇪🇪 {dictionary[word]}"
-        )
+        await update.message.reply_text(f"🇷🇺 {word}\n🇪🇪 {dictionary[word]}")
     else:
-        await update.message.reply_text(
-            "❌ Такого слова пока нет в словаре."
-        )
+        await update.message.reply_text("❌ Такого слова пока нет в словаре.")
+    
 
 app = Application.builder().token(TOKEN).build()
 
