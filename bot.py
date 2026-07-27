@@ -55,8 +55,9 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(text) > 3500:
             await update.message.reply_text(text)
             text = "📚 Продолжение:\n\n"
-if text:
-    await update.message.reply_text(text)
+
+    if text:
+        await update.message.reply_text(text)
 
 
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
