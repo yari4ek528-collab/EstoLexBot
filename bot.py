@@ -15,6 +15,7 @@ main_keyboard = ReplyKeyboardMarkup(
     [
         ["📖 Перевести"],
         ["📚 Учить слова"],
+        ["📚 Слова"],
         ["📊 Статистика"],
         ["⚙️ Настройки", "ℹ️ Помощь"],
     ],
@@ -59,6 +60,9 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(text)
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
+    if text == "📚 Слова":
+    await words(update, context)
+    return
 
     if text == "📖 Перевести":
         await update.message.reply_text("✍️ Напишите русское слово для перевода.")
