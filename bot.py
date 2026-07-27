@@ -7,7 +7,7 @@ from telegram.ext import (
     filters,
 )
 
-TOKEN = "8847485249:AAFFUi2oRcHYCE03YFHr20cwL64rKoj0DiM"
+TOKEN = "8847485249:AAFwZvPW9fOwenoUpLfVZKn5XP8UTuwOqCk"
 
 dictionary = {
     "привет": "tere",
