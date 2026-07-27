@@ -46,3 +46,16 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, translate))
 
 app.run_polling()
+async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    word = update.message.text.lower().strip()
+
+    print(f"Получено: {word}")
+
+    translation = dictionary.get(word)
+
+    if translation:
+        await update.message.reply_text(f"🇷🇺 {word}\n🇪🇪 {translation}")
+    else:
+        await update.message.reply_text(
+            f"❌ Слово «{word}» пока отсутствует в словаре."
+)
