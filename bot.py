@@ -9,7 +9,7 @@ from telegram.ext import (
 import random
 from dictionary import dictionary
 
-TOKEN = "ВАШ_ТОКЕН_ОТ_BOTFATHER"
+TOKEN = "8847485249:AAFwZvPW9fOwenoUpLfVZKn5XP8UTuwOqCk"
 
 main_keyboard = ReplyKeyboardMarkup(
     [
