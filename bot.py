@@ -21,12 +21,27 @@ dictionary = {
     "вода": "vesi",
     "хлеб": "leib",
 }
+async def about(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "🇪🇪 EstoLex\n\n"
+        "Переводчик русского и эстонского языков.\n"
+        "Версия: 1.0\n\n"
+        "Создан для изучения эстонского языка."
+    )
 
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "📖 Команды:\n\n"
+        "/start — открыть меню\n"
+        "/about — информация о боте\n"
+        "/help — помощь\n\n"
+        "Или просто отправьте русское слово для перевода."
+    )
 main_keyboard = ReplyKeyboardMarkup(
     [
-        ["📖 Перевести", "🔍 Поиск"],
-        ["📚 Учить слова", "⭐ Избранное"],
-        ["➕ Добавить слово", "📊 Статистика"],
+        ["📖 Перевести"],
+        ["📚 Учить слова"],
+        ["📊 Статистика"],
         ["⚙️ Настройки", "ℹ️ Помощь"],
     ],
     resize_keyboard=True,
