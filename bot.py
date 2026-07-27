@@ -9,26 +9,16 @@ from telegram.ext import (
 
 TOKEN = "8847485249:AAFwZvPW9fOwenoUpLfVZKn5XP8UTuwOqCk"
 
-dictionary = {
-    "привет": "tere",
-    "спасибо": "aitäh",
-    "да": "jah",
-    "нет": "ei",
-    "дом": "maja",
-    "кот": "kass",
-    "собака": "koer",
-    "машина": "auto",
-    "вода": "vesi",
-    "хлеб": "leib",
-}
+,
+
 async def about(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🇪🇪 EstoLex\n\n"
         "Переводчик русского и эстонского языков.\n"
         "Версия: 1.0\n\n"
         "Создан для изучения эстонского языка."
+        from dictionary import dictionary
     )
-
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "📖 Команды:\n\n"
