@@ -61,7 +61,7 @@ async def words(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
     if text == "📚 Слова":
-    await words(update, context)
+        await words(update, context)
     return
 
     if text == "📖 Перевести":
