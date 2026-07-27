@@ -6,27 +6,11 @@ from telegram.ext import (
     ContextTypes,
     filters,
 )
+import random
+from dictionary import dictionary
 
-TOKEN = "8847485249:AAFwZvPW9fOwenoUpLfVZKn5XP8UTuwOqCk"
+TOKEN = "ВАШ_ТОКЕН_ОТ_BOTFATHER"
 
-,
-
-async def about(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "🇪🇪 EstoLex\n\n"
-        "Переводчик русского и эстонского языков.\n"
-        "Версия: 1.0\n\n"
-        "Создан для изучения эстонского языка."
-        from dictionary import dictionary
-    )
-async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "📖 Команды:\n\n"
-        "/start — открыть меню\n"
-        "/about — информация о боте\n"
-        "/help — помощь\n\n"
-        "Или просто отправьте русское слово для перевода."
-    )
 main_keyboard = ReplyKeyboardMarkup(
     [
         ["📖 Перевести"],
@@ -45,7 +29,22 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=main_keyboard,
     )
 
-import random
+async def about(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "🇪🇪 EstoLex\n\n"
+        "Переводчик русского и эстонского языков.\n"
+        "Версия: 1.0\n\n"
+        "Создан для изучения эстонского языка."
+    )
+
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "📖 Команды:\n\n"
+        "/start — открыть меню\n"
+        "/about — информация о боте\n"
+        "/help — помощь\n\n"
+        "Или просто отправьте русское слово для перевода."
+    )
 
 async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
@@ -54,25 +53,10 @@ async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("✍️ Напишите русское слово для перевода.")
         return
 
-    if text == "🔍 Поиск":
-        await update.message.reply_text("Введите слово для поиска.")
-        return
-
     if text == "📚 Учить слова":
         ru = random.choice(list(dictionary.keys()))
         await update.message.reply_text(
             f"📖 Слово дня:\n\n🇷🇺 {ru}\n🇪🇪 {dictionary[ru]}"
-        )
-        return
-
-    if text == "⭐ Избранное":
-        await update.message.reply_text("⭐ Пока список избранного пуст.")
-        return
-
-    if text == "➕ Добавить слово":
-        await update.message.reply_text(
-            "Отправьте новое слово в формате:\n"
-            "русское - эстонское"
         )
         return
 
@@ -89,9 +73,7 @@ async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     if text == "ℹ️ Помощь":
-        await update.message.reply_text(
-            "Напишите русское слово — я переведу его на эстонский."
-        )
+        await help_command(update, context)
         return
 
     word = text.lower().strip()
@@ -104,20 +86,12 @@ async def translate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             "❌ Такого слова пока нет в словаре."
         )
-        return
-
-    word = text.lower()
-
-    if word in dictionary:
-        await update.message.reply_text(
-            f"🇷🇺 {word}\n🇪🇪 {dictionary[word]}"
-        )
-    else:
-        await update.message.reply_text("❌ Такого слова пока нет в словаре.")
 
 app = Application.builder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("about", about))
+app.add_handler(CommandHandler("help", help_command))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, translate))
 
 print("EstoLex запущен...")
